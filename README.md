@@ -1,29 +1,20 @@
-# README #
+# Telr Payments Plugin for Opencart #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This plugin enables your Opencart powered platform to start accepting payments via Telr.
 
-### What is this repository for? ###
+### How to Install Telr’s Opencart Plugin? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Download and unzip the package.
+* Log in to the Opencart administration system, from the side menu select the Extension --> Installer option and click.
+* In Installer page, click on right side upload icon button and upload the zip file 'telr_oc.ocmod.zip' from Downloaded package.
+* After successfully uploaded, from the side menu select Extensions --> Extensions --> Choose the extension type --> payments option.
+* Locate the line for Telr in payment page and click on install option.
+* After successfully install click on edit icon.
+* Add your 'Store ID' and 'Authentication Key' in the payment setting page and fill all required fileds (Note : If you have not 'Store ID' and 'Authentication Key' please contact with Telr support)
 
-### How do I get set up? ###
+### Supported Version ###
+Opencart 4.x
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### License ###
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+This repository is available under the [MIT license](LICENSE).
