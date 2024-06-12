@@ -15,6 +15,6 @@ This plugin enables your Opencart powered platform to start accepting payments v
 ### Supported Version ###
 Opencart 4.x
 
-## License
+### License ###
 
 This repository is available under the [MIT license](LICENSE).
