@@ -4,7 +4,7 @@ This plugin enables your Opencart powered platform to start accepting payments v
 
 ### How to Install Telr’s Opencart Plugin? ###
 
-* Download zip files.
+* Download package and make zip file of the 'telr_oc.ocmod' directory.
 * Log in to the Opencart administration system, from the side menu select the Extension --> Installer option and click.
 * In Installer page, click on right side upload icon button and upload the zip file 'telr_oc.ocmod.zip' from Downloaded package.
 * After successfully uploaded, from the side menu select Extensions --> Extensions --> Choose the extension type --> payments option.
@@ -14,7 +14,7 @@ This plugin enables your Opencart powered platform to start accepting payments v
 
 ### How to Install Telr’s Opencart ApplePay Integration Plugin? ###
 
-* Download zip files.
+* Download package and make zip file of the 'telr_applepay_oc.ocmod' directory..
 * Log in to the Opencart administration system, from the side menu select the Extension --> Installer option and click.
 * In Installer page, click on right side upload icon button and upload the zip file 'telr_applepay_oc.ocmod.zip' from Downloaded package.
 * After successfully uploaded, from the side menu select Extensions --> Extensions --> Choose the extension type --> payments option.
