@@ -62,37 +62,37 @@
                     {% if error_merchant_identifier %}
                     <div class="text-danger">{{ error_merchant_identifier }}</div>
                     {% endif %}
-				  </div>
+                  </div>
                 </div>
                 <div class="row mb-3 required">
                   <label class="col-sm-2 col-form-label" for="payment_telr_applepay_merchant_certificate">{{ entry_merchant_certificate }}</label>
                   <div class="col-sm-6">
                     <input type="file" name="payment_telr_applepay_merchant_certificate" value="{{ payment_telr_applepay_merchant_certificate }}" placeholder="{{ help_merchant_certificate }}" id="payment_telr_applepay_merchant_certificate" class="form-control"/>
-					{% if error_certificate %}
+                    {% if error_certificate %}
                     <div class="text-danger">{{ error_certificate }}</div>
                     {% endif %}
                   </div>
-				  {% if applepay_merchant_certificate_name %}
-				  <label class="col-sm-2 fw-bold" for="applepay_merchant_certificate_name">{{ applepay_merchant_certificate_name }}</label>
-				  {% endif %}
+                  {% if applepay_merchant_certificate_name %}
+                  <label class="col-sm-2 fw-bold" for="applepay_merchant_certificate_name">{{ applepay_merchant_certificate_name }}</label>
+                  {% endif %}
                 </div>	
                 <div class="row mb-3 required">
                   <label class="col-sm-2 col-form-label" for="payment_telr_applepay_merchant_key">{{ entry_merchant_key }}</label>
                   <div class="col-sm-6">
                     <input type="file" name="payment_telr_applepay_merchant_key" value="{{ payment_telr_applepay_merchant_key }}" placeholder="{{ help_merchant_key }}" id="payment_telr_applepay_merchant_key" class="form-control"/>
-					{% if error_certificate_key %}
+                    {% if error_certificate_key %}
                     <div class="text-danger">{{ error_certificate_key }}</div>
                     {% endif %}
                   </div>
-				  {% if applepay_merchant_key_name %}
-				  <label class="col-sm-2 fw-bold" for="applepay_merchant_key_name">{{ applepay_merchant_key_name }}</label>
-				  {% endif %}
+                  {% if applepay_merchant_key_name %}
+                  <label class="col-sm-2 fw-bold" for="applepay_merchant_key_name">{{ applepay_merchant_key_name }}</label>
+                  {% endif %}
                 </div>
                 <div class="row mb-3 required">
                   <label class="col-sm-2 col-form-label" for="payment_telr_applepay_domain">{{ entry_domain }}</label>
                   <div class="col-sm-10">
                     <input type="text" name="payment_telr_applepay_domain" value="{{ payment_telr_applepay_domain }}" placeholder="{{ help_domain }}" id="payment_telr_applepay_domain" class="form-control"/>
-					{% if error_domain %}
+                    {% if error_domain %}
                     <div class="text-danger">{{ error_domain }}</div>
                     {% endif %}
                   </div>
@@ -101,7 +101,7 @@
                   <label class="col-sm-2 col-form-label" for="payment_telr_applepay_domain_name">{{ entry_domain_name }}</label>
                   <div class="col-sm-10">
                     <input type="text" name="payment_telr_applepay_domain_name" value="{{ payment_telr_applepay_domain_name }}" placeholder="{{ help_domain_name }}" id="payment_telr_applepay_domain_name" class="form-control"/>
-					{% if error_domain_name %}
+                    {% if error_domain_name %}
                     <div class="text-danger">{{ error_domain_name }}</div>
                     {% endif %}
                   </div>

@@ -22,7 +22,7 @@ This plugin enables your Opencart powered platform to start accepting payments v
 * After successfully install click on edit icon.
 * Add your 'Store ID', 'Remote Authentication Key' in the payment setting page and fill all required fileds (Note : If you have not 'Store ID' and 'Remote Authentication Key' please contact with Telr support)
 
-* Note : For ApplePay Integration you required Apple Merchant Identifier Key, Apple Merchant Certificate, Apple Merchant Certificate Key and Apple Verified Domain name.
+* Note : For Apple Pay integration, you need the Apple Merchant Identifier Key, Apple Merchant Certificate, Apple Merchant Certificate Key and Apple Verified Domain name.
 
 ### Supported Version ###
 Opencart 4.x

@@ -22,9 +22,9 @@ class TelrApplepay extends \Opencart\System\Engine\Controller {
 	}
 	
 	public function certificatevalidation(){
-		$url          = $this->request->post['url'];
-        $domain       = $this->config->get('payment_telr_applepay_domain');
-        $display_name = $this->config->get('payment_telr_applepay_domain_name');
+        $url             = $this->request->post['url'];
+        $domain          = $this->config->get('payment_telr_applepay_domain');
+        $display_name    = $this->config->get('payment_telr_applepay_domain_name');
         $merchant_id     = $this->config->get('payment_telr_applepay_merchant_identifier');
         $certificate     = $this->config->get('payment_telr_applepay_merchant_certificate');
         $certificate_key = $this->config->get('payment_telr_applepay_merchant_key');
