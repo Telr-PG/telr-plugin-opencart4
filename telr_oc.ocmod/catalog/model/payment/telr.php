@@ -10,11 +10,11 @@ class Telr extends \Opencart\System\Engine\Model {
 		$total = $this->cart->getTotal(); 
 		
 		$this->load->language('extension/telr_oc/payment/telr');
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('telr_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_telr_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 		
-		if ($this->config->get('telr_total') > $total) {
+		if ($this->config->get('payment_telr_total') > $total) {
 			$status = false;
-		} elseif (!$this->config->get('telr_geo_zone_id')) {
+		} elseif (!$this->config->get('payment_telr_geo_zone_id')) {
 			$status = true;
 		} elseif ($query->num_rows) {
 			$status = true;
@@ -23,7 +23,7 @@ class Telr extends \Opencart\System\Engine\Model {
 		}	
 		
 		$method_data = array();
-		$title=trim($this->config->get('telr_title'));
+		$title=trim($this->config->get('payment_telr_title'));
 		if (empty($title)) {
 			$title=trim($this->language->get('text_title'));
 			if (empty($title)) {
@@ -55,7 +55,7 @@ class Telr extends \Opencart\System\Engine\Model {
 		$total = $this->cart->getTotal(); 
 		
 		$this->load->language('extension/telr_oc/payment/telr');
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('telr_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_telr_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 		
 		if ($this->config->get('telr_total') > $total) {
 			$status = false;

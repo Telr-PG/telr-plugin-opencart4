@@ -35,6 +35,7 @@ class TelrApplepay extends \Opencart\System\Engine\Controller {
 		$data['entry_authkey'] = $this->language->get('entry_authkey');
 		$data['entry_callback'] = $this->language->get('entry_callback');
 		$data['entry_purdesc'] = $this->language->get('entry_purdesc');
+		$data['entry_total'] = $this->language->get('entry_total');		
 		$data['entry_pend_status'] = $this->language->get('entry_pend_status');
 		$data['entry_comp_status'] = $this->language->get('entry_comp_status');
 		$data['entry_void_status'] = $this->language->get('entry_void_status');
@@ -50,6 +51,7 @@ class TelrApplepay extends \Opencart\System\Engine\Controller {
 		$data['help_authkey'] = $this->language->get('help_authkey');
 		$data['help_callback'] = $this->language->get('help_callback');
 		$data['help_purdesc'] = $this->language->get('help_purdesc');
+		$data['help_total'] = $this->language->get('help_total');		
 		$data['help_merchant_identifier'] = $this->language->get('help_merchant_identifier');
 		$data['help_merchant_certificate'] = $this->language->get('help_merchant_certificate');
 		$data['help_merchant_key'] = $this->language->get('help_merchant_key');
@@ -189,7 +191,13 @@ class TelrApplepay extends \Opencart\System\Engine\Controller {
 		$data['payment_telr_applepay_title']= $this->config->get('payment_telr_applepay_title');
 		$data['applepay_merchant_key_name']= $this->config->get('payment_telr_applepay_merchant_key_name');
 		$data['applepay_merchant_certificate_name']= $this->config->get('payment_telr_applepay_merchant_certificate_name');
-		
+
+		if (isset($this->request->post['payment_telr_applepay_total'])) {
+			$data['payment_telr_applepay_total'] = $this->request->post['payment_telr_applepay_total'];
+		} else {
+			$data['payment_telr_applepay_total'] = $this->config->get('payment_telr_applepay_total');
+		}
+
 		if (isset($this->request->post['payment_telr_applepay_pend_status_id'])) {
 			$data['payment_telr_applepay_pend_status_id'] = $this->request->post['payment_telr_applepay_pend_status_id'];
 		} else {
