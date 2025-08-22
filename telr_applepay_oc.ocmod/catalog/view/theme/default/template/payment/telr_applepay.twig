@@ -1,0 +1,169 @@
+<style>
+.apple-pay-button {
+    width: var(--wallet-button-width);
+    height: var(--wallet-button-height);
+    display: inline-block;
+    -webkit-appearance: -apple-pay-button;
+    cursor: pointer;
+}
+.apple-pay-button-black-with-text {
+    -apple-pay-button-style: black;
+}
+.apple-pay-button-text-buy {
+    -apple-pay-button-type: buy;
+}
+</style>
+<div class="buttons">
+   <div class="pull-right">
+        <button type="button" id="btn-applepay" class="apple-pay-button apple-pay-button-text-buy apple-pay-button-black-with-text d-none"></button>
+   </div>
+ </div>
+ <script type="text/javascript">
+        if (window.ApplePaySession) {
+                var canMakePayments = ApplePaySession.canMakePayments("{{ apple_mercahnt_id }}");
+                if ( canMakePayments ) { console.log("Hello");
+                        document.getElementById("btn-applepay").classList.remove("d-none");
+                }else{
+                        document.getElementById("btn-applepay").remove();
+                        var errorMsg = document.createElement("div");
+                        errorMsg.className = "alert alert-danger mt-2";
+                        errorMsg.textContent = "Applepay merchant id is invalid";
+                        document.getElementById("btn-applepay-container").appendChild(errorMsg);
+                }
+        }else{
+                document.getElementById("btn-applepay").remove();
+                var errorMsg = document.createElement("div");
+                errorMsg.className = "alert alert-danger mt-2";
+                errorMsg.textContent = "Apple Pay session not activated or not supported";
+                document.getElementById("btn-applepay-container").appendChild(errorMsg);
+        }
+        if (typeof sendPaymentToken === 'undefined') {
+			var sendPaymentToken = function (paymentToken) {
+					return new Promise(function (resolve, reject) {
+							paymentData = paymentToken;
+							resolve(true);
+					}).catch(function (validationErr) {
+							jQuery(".applePay_error").text('Unable to process Apple Pay payment. Please reload the page and try again');
+							setTimeout(function(){
+									jQuery(".applePay_error").text('');
+							}, 5000);
+									session.abort();
+					});
+			}
+		}
+        if (typeof sendPaymentToTelr === 'undefined') {
+			var sendPaymentToTelr = function (data,session) {
+					jQuery.ajax({
+							type: 'POST',
+							url: 'index.php?route=extension/telr_applepay_oc/payment/telr_applepay.paymentprocess',
+							data: { applepayversion: data.paymentData.version,
+									applepaydata : data.paymentData.data,
+									applepaysignature : data.paymentData.signature,
+									applepaytransactionid : data.paymentData.header.transactionId,
+									applepaytype : data.paymentMethod.type,
+									applepaynetwork : data.paymentMethod.network,
+									applepaydisplayname : data.paymentMethod.displayName,
+									applepaykeyhash : data.paymentData.header.publicKeyHash,
+									applepaykey : data.paymentData.header.ephemeralPublicKey,
+									applepaytransactionidentifier : data.transactionIdentifier
+							},
+							success: function (outcome) {
+									if (outcome.redirect) {
+											if (outcome.redirect.indexOf('checkout/success') !== -1) {
+												  session.completePayment(ApplePaySession.STATUS_SUCCESS);
+											}else{
+												  session.completePayment(ApplePaySession.STATUS_FAILURE);
+											}
+											window.location.href = outcome.redirect;
+									}
+							}
+					});
+			}
+		}
+        if (typeof performAppleUrlValidation === 'undefined') {
+			var performAppleUrlValidation = function (valURL, callback) {
+					jQuery.ajax({
+							type: 'POST',
+							url: 'index.php?route=extension/telr_applepay_oc/payment/telr_applepay.certificatevalidation',
+							data: { url: valURL, },
+							success: function (outcome) {
+									var data = JSON.parse(outcome);
+									callback(data);
+							}
+					});
+			}
+		}
+        if (typeof getApplePayRequestPayload === 'undefined') {
+			var getApplePayRequestPayload = function (){
+					var networksSupported = ['masterCard', 'visa'];
+					var merchantCapabilities = ['supports3DS', 'supportsCredit', 'supportsDebit'];
+					return {
+							currencyCode: "{{currency_code}}",
+							countryCode: "{{country_code}}",
+							merchantCapabilities: merchantCapabilities,
+							supportedNetworks: networksSupported,
+							total: {
+									label: window.location.host,
+									amount: "{{amount}}",
+									type: 'final'
+							}
+					}
+			}
+		}
+        if (typeof handleApplePayEvents === 'undefined') {
+			var handleApplePayEvents = function (session) {
+					session.onvalidatemerchant = function (event) {
+							performAppleUrlValidation(event.validationURL, function (merchantSession) {
+									session.completeMerchantValidation(merchantSession);
+							});
+					};
+
+					session.onpaymentmethodselected = function (event) {
+							var newTotal = {
+									type: 'final',
+									label: window.location.host,
+									amount: '{{amount}}',
+							};
+							var newLineItems = [
+									{
+											type: 'final',
+											label: 'Subtotal',
+											amount: '0'
+									},
+									{
+											type: 'final',
+											label: 'Shipping Name',
+											amount: '0'
+									}
+							];
+							session.completePaymentMethodSelection(newTotal, newLineItems);
+					};
+
+					session.onpaymentauthorized = function (event) {
+							var promise = sendPaymentToken(event.payment.token);
+							promise.then(function (success) {
+									var status;
+									if (success) {
+											sendPaymentToTelr(paymentData,session);
+									} else {
+											status = ApplePaySession.STATUS_FAILURE;
+											session.completePayment(status);
+									}
+							}).catch(function (validationErr) {
+									jQuery(".applePay_error").text('Unable to process Apple Pay payment. Please reload the page and try again.');
+									setTimeout(function(){
+											jQuery(".applePay_error").text('');
+									}, 5000);
+									session.abort();
+							});
+					}
+					session.oncancel = function (event) {};
+			}
+		}
+        jQuery( document ).off( 'click', '#btn-applepay');
+        jQuery( document ).on( 'click', '#btn-applepay', function () {
+                var applePaySession = new ApplePaySession(3, getApplePayRequestPayload());
+                handleApplePayEvents(applePaySession);
+                applePaySession.begin();
+        });
+ </script>
