@@ -5,7 +5,7 @@ $_['heading_title']      = 'Telr';
 // Text 
 $_['text_payment']       = 'Payment';
 $_['text_success']       = 'Success: You have modified Telr account details.';
-$_['text_telr']      	  = '<img src="../extension/telr_oc/admin/view/image/payment/telr.png" alt="Telr" title="Telr" style="border: 1px solid #EEEEEE;" />';
+$_['text_telr']      	 = '<img src="../extension/telr_oc/admin/view/image/payment/telr.png" alt="Telr" title="Telr" style="border: 1px solid #EEEEEE;" />';
 $_['text_live']          = 'No';
 $_['text_test']          = 'Yes';
       
@@ -43,11 +43,11 @@ $_['error_purdesc']      = 'Required. Max 63 chars.';
 
 // V2 Update
 $_['entry_lang']         = 'Language';
-$_['lang_en']         	  = 'English';
-$_['lang_ar']         	  = 'Arabic';
+$_['lang_en']         	 = 'English';
+$_['lang_ar']         	 = 'Arabic';
 
 $_['entry_pay_mode']     = 'Payment Mode';
-$_['pay_std']         	  = 'Standard Mode';
-$_['pay_frm']         	  = 'Framed Mode';
+$_['pay_std']         	 = 'Standard Mode';
+$_['pay_frm']         	 = 'Framed Mode';
 
 ?>
